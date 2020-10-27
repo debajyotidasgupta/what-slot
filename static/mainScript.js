@@ -1,11 +1,9 @@
-
-$(function () {
+$(function() {
     $("#search-bar").autocomplete({
         source: "/search/",
         // minLength: 3,
     });
-}
-);
+});
 
 function clearTT() {
     for (var i = 0; i < 5; ++i) {
@@ -34,8 +32,7 @@ function sdCallback(data, id, course) {
                 $('#' + courseData['Slot'][slot]).addClass('border border-danger');
                 $('#' + courseData['Slot'][slot]).html(data['Name'].split(':')[0])
             }
-        }
-        else {
+        } else {
             parentList = document.getElementById(id);
             var item = document.createElement('li');
             item.className = "course";
@@ -57,15 +54,13 @@ function searchData(q = $("#search-bar").val(), id = undefined) {
     if (typeof q !== "string") {
         searchString = q.innerHTML; // Get list item's name
         q.className += ' active';
-    }
-    else {
+    } else {
         searchString = q;
     }
-    $.post("/ajax/",
-        {
+    $.post("/ajax/", {
             "query": searchString
         },
-        function (data) {
+        function(data) {
             sdCallback(data, id, searchString);
         },
         "json"
@@ -73,7 +68,7 @@ function searchData(q = $("#search-bar").val(), id = undefined) {
 }
 
 $("#search-but").click(searchData);
-$("#search-bar").on('keypress', function (e) {
+$("#search-bar").on('keypress', function(e) {
     if (e.which === 13) {
         $(this).attr("disabled", "disabled");
         searchData();
@@ -82,7 +77,7 @@ $("#search-bar").on('keypress', function (e) {
 });
 
 function loadMinor() {
-    $.get("/minor/", function (data) {
+    $.get("/minor/", function(data) {
         minorDiv = document.getElementById('minor-div');
         var jdata = JSON.parse(data);
         for (var i in jdata) {
@@ -94,7 +89,7 @@ function loadMinor() {
             heading.innerHTML = "<i data-feather='chevron-down'></i>" + minor['Name'];
             heading.addEventListener(
                 'click',
-                function (e) {
+                function(e) {
                     var elem = $(e.target)[0].nextElementSibling;
                     $(elem).toggleClass('open');
                     e.target.removeChild(e.target.childNodes[0]);
@@ -157,7 +152,7 @@ function readICS() {
         $('#timet td').removeClass('table-danger');
 
         var reader = new FileReader();
-        reader.onload = function (e) {
+        reader.onload = function(e) {
             var content = e.target.result;
             var slots = content.split('DTSTART;TZID=Asia/Kolkata;VALUE=DATE-TIME:');
             for (i in slots) {
@@ -197,18 +192,20 @@ function readICS() {
 //toggle night/light mode
 var button = false;
 var lightColors = [
-    '#ec3654',
-    '#36c1ec',
-    '#40d48f',
-    '#b535ff',
-    '#ff9913'
-], darkColors = [
-    '#12c571',
-    '#1886e0',
-    '#ff69b4',
-    '#e63b58',
-    '#b039ff'
-]
+        '#ec3654',
+        '#36c1ec',
+        '#40d48f',
+        '#b535ff',
+        '#ff9913'
+    ],
+    darkColors = [
+        '#12c571',
+        '#1886e0',
+        '#ff69b4',
+        '#e63b58',
+        '#b039ff'
+    ]
+
 function toggleDarkLight() {
     var mainColor = lightColors[0];
     if (button) {
@@ -221,11 +218,10 @@ function toggleDarkLight() {
             .setProperty('--bg-color', 'white');
         document.documentElement.style
             .setProperty('--text-color', '#2e2e2e');
-
         document.documentElement.style
             .setProperty('--search-color', '#2e2e2e');
-    }
-    else {
+        document.getElementById("fixedFooter").style.backgroundColor = "white";
+    } else {
         button = true;
         // Dark Mode colors
         mainColor = darkColors[Math.floor(Math.random() * darkColors.length)];
@@ -237,6 +233,7 @@ function toggleDarkLight() {
             .setProperty('--text-color', '#e0e0e0');
         document.documentElement.style
             .setProperty('--search-color', '#2e2e2e');
+        document.getElementById("fixedFooter").style.backgroundColor = "#1f1f33";
     }
     document.documentElement.style
         .setProperty('--main-color', mainColor);
