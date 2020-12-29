@@ -34,7 +34,7 @@ headers = {
 * After script has finished executing, the app is ready to be deployed once again for the new semester.
 
 ## Runnning locally
-1. `https://github.com/metakgp/what-slot.git`
+1. `git clone https://github.com/metakgp/what-slot.git`
 2. `cd what-slot`
 3. `pipenv shell --three`
 4. `pipenv install` (Only the first time)
