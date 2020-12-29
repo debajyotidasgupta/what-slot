@@ -28,7 +28,6 @@ def getData(dep):
 
 	courses = []
 
-	print(response.text)
 	soup = BeautifulSoup(response.text, 'html.parser')
 	try:
 		parentTable = soup.find('table', {'id': 'disptab'})
