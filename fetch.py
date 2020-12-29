@@ -8,7 +8,7 @@ headers = {
 	'Cookie' : 'JSESSIONID={}'.format(cookie)
 }
 form = {
-	'for_session': '2019-2020',
+	'for_session': '2020-2021',
 	'for_semester': 'SPRING',
 	'dept': '{}'
 }
